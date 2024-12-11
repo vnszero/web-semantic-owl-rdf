@@ -5,8 +5,9 @@ owl/rdf approach for monopoly detection in public contracts
 ## Backend
 
 ### csv to turtle
-
+```bash
 npm install csv-parser
+```
 
 ### apache jena
 
@@ -14,7 +15,13 @@ Download Apache Jena Fuseki 5.2.0.zip
 https://jena.apache.org/download/index.cgi
 
 Install openjdk 17
+```bash
 sudo apt-get install openjdk-17-jdk
+```
+
+```bash
+./backend/apache-jena-fuseki-5.2.0/fuseki-ser
+```
 
 ### SPARQL
 
