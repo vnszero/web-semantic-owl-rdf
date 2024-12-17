@@ -20,7 +20,7 @@ sudo apt-get install openjdk-17-jdk
 ```
 
 ```bash
-./backend/apache-jena-fuseki-5.2.0/fuseki-ser
+./backend/apache-jena-fuseki-5.2.0/fuseki-server
 ```
 
 ### SPARQL

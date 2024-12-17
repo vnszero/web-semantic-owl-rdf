@@ -1,3 +1,4 @@
 backend/node_modules
 backend/apache-jena-fuseki-5.2.0
 backend/contracts/health/output.ttl
+backend/run
