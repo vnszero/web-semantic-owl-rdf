@@ -67,10 +67,20 @@ const convertCsvToTurtle = async () => {
             :distanceGlobalPublicEntitiesCount ${cleanValue(row.distanceGlobalPublicEntitiesCount)} ;
             :marketSharePublicEntitiesCountFormatted "${cleanValue(row.marketSharePublicEntitiesCountFormatted)}" .
         `);
+        
+                // Group companies by cpvDesignation for relationships
+                const cpv = cleanValue(row.cpvDesignation);
+                if (cpv) {
+                    if (!groupsByCpv[cpv]) {
+                        groupsByCpv[cpv] = [];
+                    }
+                    groupsByCpv[cpv].push(resourceURI);
+                }
+        
             } catch (error) {
                 console.error('Error processing row:', row, error);
             }
-        })
+        })        
         .on('end', () => {
             // Generate unique relationships within the same cpvDesignation group
             Object.keys(groupsByCpv).forEach((cpv) => {
