@@ -1,0 +1,18 @@
+# Companies with High Market Share
+
+PREFIX : <http://example.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?companyName ?cpvDesignation ?marketShare
+WHERE {
+  ?company a :Company ;
+           :companyName ?companyName ;
+           :cpvDesignation ?cpvDesignation ;
+           :marketShareCpvValueNormalizedFormatted ?marketShareString .
+
+  # Clean and cast the market share to xsd:decimal
+  BIND(xsd:decimal(REPLACE(REPLACE(?marketShareString, "%", ""), ",", ".")) AS ?marketShare)
+
+  FILTER (?marketShare > 50)
+}
+ORDER BY DESC(?marketShare)

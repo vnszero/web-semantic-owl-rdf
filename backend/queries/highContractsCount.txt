@@ -1,0 +1,19 @@
+# Companies with High Contracts Count and Low Competition
+
+PREFIX : <http://example.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?companyName ?cpvDesignation ?contractsCount (COUNT(?competitor) AS ?competesWithCount)
+WHERE {
+  ?company a :Company ;
+           :companyName ?companyName ;
+           :cpvDesignation ?cpvDesignation ;  # Include cpvDesignation here
+           :contractsCount ?contractsCount .
+  
+  OPTIONAL {
+    ?company :competesWith ?competitor .
+  }
+}
+GROUP BY ?companyName ?cpvDesignation ?contractsCount  # Include cpvDesignation in GROUP BY
+HAVING (xsd:integer(?contractsCount) > 30 && COUNT(?competitor) < 7)
+ORDER BY DESC(xsd:integer(?contractsCount))
