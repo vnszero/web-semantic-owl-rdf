@@ -1,0 +1,10 @@
+﻿otherCompanyName,cpvDesignation,totalCpvValueNormalizedFormatted,contractsCount,publicEntitiesCount,totalCpvValueFormatted,distanceAvgCpvValueNormalizedFormatted,distanceStdCpvValueNormalizedFormatted,distanceGlobalCpvValueNormalizedFormatted,marketShareCpvValueNormalizedFormatted,distanceGlobalContractsCount,marketShareContractsCountFormatted,distanceGlobalPublicEntitiesCount,marketSharePublicEntitiesCountFormatted
+"""Zimmer Biomet (500254990)""","""Próteses""","""7,172.26""",11,4,"""1,228,110.12""","""-6,485.48""","""7,080.09""","""20,298.91""","""26.11%""",29,"""27.50%""",7,"""36.36%"""
+"""LIMA IMPLANTES PORTUGAL (508634784)""","""Próteses""","""5,945.39""",7,2,"""1,197,042.00""","""-5,258.61""","""5,853.22""","""21,525.78""","""21.64%""",33,"""17.50%""",9,"""18.18%"""
+"""ARTUR SALGADO, SA (503612600)""","""Próteses""","""5,352.15""",6,2,"""1,245,852.00""","""-4,665.37""","""5,259.98""","""22,119.02""","""19.48%""",34,"""15.00%""",9,"""18.18%"""
+"""MBA PORTUGAL, SA (504445960)""","""Próteses""","""3,194.83""",6,3,"""1,208,975.00""","""-2,508.05""","""3,102.66""","""24,276.34""","""11.63%""",34,"""15.00%""",8,"""27.27%"""
+"""STRYKER PORTUGAL PRODUTOS MEDICOS, LDA (504594214)""","""Próteses""","""1,713.28""",2,2,"""988,063.76""","""-1,026.50""","""1,621.11""","""25,757.89""","""6.24%""",38,"""5.00%""",9,"""18.18%"""
+"""SMITH & NEPHEW, LDA. (503552461)""","""Próteses""","""1,669.88""",3,1,"""544,395.00""","""-983.10""","""1,577.71""","""25,801.29""","""6.08%""",37,"""7.50%""",10,"""9.09%"""
+"""Johnson & Johnson Lda (500153370)""","""Próteses""","""1,230.38""",3,3,"""597,844.00""","""-543.60""","""1,138.21""","""26,240.79""","""4.48%""",37,"""7.50%""",8,"""27.27%"""
+"""Boston Scientific Portugal, Dispositivos Médicos, Lda. (504988964)""","""Próteses""","""785.92""",1,1,"""268,000.00""","""-99.14""","""693.75""","""26,685.25""","""2.86%""",39,"""2.50%""",10,"""9.09%"""
+"""Medtronic Portugal lda (504223933)""","""Próteses""","""407.08""",1,1,"""148,990.00""","""279.70""","""314.91""","""27,064.09""","""1.48%""",39,"""2.50%""",10,"""9.09%"""
