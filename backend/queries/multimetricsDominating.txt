@@ -8,11 +8,8 @@ WHERE {
   ?company a :Company ;
            :companyName ?companyName ;
            :cpvDesignation ?cpvDesignation ;
-           :marketShareCpvValueNormalizedFormatted ?marketShareString ;
+           :marketShareCpvValueNormalizedFormatted ?marketShare ;
            :contractsCount ?contractsCount .
-
-  # Clean and cast the market share to decimal
-  BIND(xsd:decimal(REPLACE(REPLACE(?marketShareString, "%", ""), ",", ".")) AS ?marketShare)
 
   OPTIONAL {
     ?company :competesWith ?competitor .

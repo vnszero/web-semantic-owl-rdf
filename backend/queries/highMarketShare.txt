@@ -8,11 +8,8 @@ WHERE {
   ?company a :Company ;
            :companyName ?companyName ;
            :cpvDesignation ?cpvDesignation ;
-           :marketShareCpvValueNormalizedFormatted ?marketShareString .
+           :marketShareCpvValueNormalizedFormatted ?marketShare .
 
-  # Clean and cast the market share to xsd:decimal
-  BIND(xsd:decimal(REPLACE(REPLACE(?marketShareString, "%", ""), ",", ".")) AS ?marketShare)
-
-  FILTER (?marketShare > 50)
+  FILTER (?marketShare > 40)
 }
 ORDER BY DESC(?marketShare)

@@ -1,0 +1,13 @@
+# Companies with CPV Value
+
+PREFIX : <http://example.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?companyName ?cpvDesignation ?totalCpvValueNormalizedFormatted
+WHERE {
+  ?company a :Company ;
+           :companyName ?companyName ;
+           :cpvDesignation ?cpvDesignation ;
+           :totalCpvValueNormalizedFormatted ?totalCpvValueNormalizedFormatted .
+}
+ORDER BY DESC(?totalCpvValueNormalizedFormatted)
