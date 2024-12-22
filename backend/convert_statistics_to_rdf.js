@@ -1,6 +1,19 @@
 const fs = require('fs');
 const path = require('path');
 const csvParser = require('csv-parser');
+const Papa = require('papaparse');
+
+// Function to clear and convert formatted numbers
+const convertToNumber = (formattedNumber) => {
+    // Remove duble quotes and comma
+    const cleanNumber = formattedNumber.replace(/"/g, '').replace(/,/g, '');
+    return cleanNumber;
+};
+
+// Function to clear and convert formatted numbers to percentages
+const convertToPercentage = (percentageString) => {
+    return parseFloat(percentageString.replace('%', '').replace(/"/g, ''));
+};
 
 // File paths
 const inputFilePath = path.join(__dirname, 'contracts/health/health-statistics.csv');
@@ -44,28 +57,29 @@ const convertCsvToTurtle = async () => {
         
                 const companyId = row.otherCompanyName.match(/\((\d+)\)/)?.[1] || 'unknown';
                 const companyName = row.otherCompanyName.replace(/\"/g, '').trim();
-                const resourceURI = `<http://example.org/company/${companyId}>`;
+                const rawDesignation = row.cpvDesignation.toLowerCase().replace(/ /g, '-').replace(/ç/g, 'c').replace(/â/g, 'a').replace(/á/g, 'a').replace(/ã/g, 'a').replace(/é/g, 'e').replace(/ó/g, 'o').replace(/"/g, '')
+                const resourceURI = `<http://example.org/company/${rawDesignation}/${companyId}>`;
         
                 // Helper function to clean values
-                const cleanValue = (value) => value?.replace(/\"/g, '').replace(/,/g, '.').trim() || '';
+                const cleanValue = (value) => value?.replace(/\"/g, '').trim() || '';
                 
                 // Add RDF triples for the company
                 turtleStatements.push(`
         ${resourceURI} a :Company ;
             :companyName "${companyName}" ;
             :cpvDesignation "${cleanValue(row.cpvDesignation)}" ;
-            :totalCpvValueNormalizedFormatted "${cleanValue(row.totalCpvValueNormalizedFormatted)}"^^xsd:decimal ;
-            :contractsCount ${cleanValue(row.contractsCount)} ;
-            :publicEntitiesCount ${cleanValue(row.publicEntitiesCount)} ;
-            :totalCpvValueFormatted "${cleanValue(row.totalCpvValueFormatted)}" ;
-            :distanceAvgCpvValueNormalizedFormatted "${cleanValue(row.distanceAvgCpvValueNormalizedFormatted)}"^^xsd:decimal ;
-            :distanceStdCpvValueNormalizedFormatted "${cleanValue(row.distanceStdCpvValueNormalizedFormatted)}"^^xsd:decimal ;
-            :distanceGlobalCpvValueNormalizedFormatted "${cleanValue(row.distanceGlobalCpvValueNormalizedFormatted)}"^^xsd:decimal ;
-            :marketShareCpvValueNormalizedFormatted "${cleanValue(row.marketShareCpvValueNormalizedFormatted)}" ;
-            :distanceGlobalContractsCount ${cleanValue(row.distanceGlobalContractsCount)} ;
-            :marketShareContractsCountFormatted "${cleanValue(row.marketShareContractsCountFormatted)}" ;
-            :distanceGlobalPublicEntitiesCount ${cleanValue(row.distanceGlobalPublicEntitiesCount)} ;
-            :marketSharePublicEntitiesCountFormatted "${cleanValue(row.marketSharePublicEntitiesCountFormatted)}" .
+            :totalCpvValueNormalizedFormatted ${convertToNumber(cleanValue(row.totalCpvValueNormalizedFormatted))} ;
+            :contractsCount ${convertToNumber(cleanValue(row.contractsCount))} ;
+            :publicEntitiesCount ${convertToNumber(cleanValue(row.publicEntitiesCount))} ;
+            :totalCpvValueFormatted ${convertToNumber(cleanValue(row.totalCpvValueFormatted))} ;
+            :distanceAvgCpvValueNormalizedFormatted ${convertToNumber(cleanValue(row.distanceAvgCpvValueNormalizedFormatted))} ;
+            :distanceStdCpvValueNormalizedFormatted ${convertToNumber(cleanValue(row.distanceStdCpvValueNormalizedFormatted))} ;
+            :distanceGlobalCpvValueNormalizedFormatted ${convertToNumber(cleanValue(row.distanceGlobalCpvValueNormalizedFormatted))} ;
+            :marketShareCpvValueNormalizedFormatted ${convertToPercentage(cleanValue(row.marketShareCpvValueNormalizedFormatted))} ;
+            :distanceGlobalContractsCount ${convertToNumber(cleanValue(row.distanceGlobalContractsCount))} ;
+            :marketShareContractsCountFormatted ${convertToPercentage(cleanValue(row.marketShareContractsCountFormatted))} ;
+            :distanceGlobalPublicEntitiesCount ${convertToNumber(cleanValue(row.distanceGlobalPublicEntitiesCount))} ;
+            :marketSharePublicEntitiesCountFormatted ${convertToPercentage(cleanValue(row.marketSharePublicEntitiesCountFormatted))} .
         `);
         
                 // Group companies by cpvDesignation for relationships
