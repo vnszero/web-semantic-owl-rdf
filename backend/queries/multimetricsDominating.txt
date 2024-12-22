@@ -18,7 +18,7 @@ WHERE {
 GROUP BY ?companyName ?cpvDesignation ?marketShare ?contractsCount
 HAVING (
   ?marketShare > 40 &&
-  xsd:integer(?contractsCount) > 50 &&
+  xsd:integer(?contractsCount) > 30 &&
   COUNT(?competitor) < 7
 )
 ORDER BY DESC(?marketShare)
