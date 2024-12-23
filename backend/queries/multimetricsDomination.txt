@@ -3,7 +3,7 @@
 PREFIX : <http://example.org/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT ?companyName ?cpvDesignation ?contractsCount ?publicEntitiesCount ?totalCpvValueNormalizedFormatted
+SELECT ?companyName (?cpvDesignation AS ?designation) (STR(?contractsCount) AS ?contracts) (STR(?publicEntitiesCount) AS ?publicEntities) (STR(?totalCpvValueNormalizedFormatted) AS ?totalCpvValueNormalized)
 WHERE {
   ?company a :Company ;
            :companyName ?companyName ;

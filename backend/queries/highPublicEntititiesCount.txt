@@ -3,12 +3,13 @@
 PREFIX : <http://example.org/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT ?companyName ?cpvDesignation ?publicEntitiesCount
+SELECT ?companyName (?cpvDesignation AS ?designation) (STR(?publicEntitiesCount) AS ?publicEntities) (STR(?marketSharePublicEntitiesCountFormatted) AS ?publicEntitiesMarketShare)
 WHERE {
   ?company a :Company ;
            :companyName ?companyName ;
            :cpvDesignation ?cpvDesignation ;
-           :publicEntitiesCount ?publicEntitiesCount .
+           :publicEntitiesCount ?publicEntitiesCount ;
+           :marketSharePublicEntitiesCountFormatted ?marketSharePublicEntitiesCountFormatted .
 
   FILTER(
     1 = 1 &&
@@ -23,5 +24,5 @@ WHERE {
 #    xsd:integer(?publicEntitiesCount) >= 1
   )
 }
-GROUP BY ?companyName ?cpvDesignation ?publicEntitiesCount
+GROUP BY ?companyName ?cpvDesignation ?publicEntitiesCount ?marketSharePublicEntitiesCountFormatted
 ORDER BY DESC(xsd:integer(?publicEntitiesCount))
