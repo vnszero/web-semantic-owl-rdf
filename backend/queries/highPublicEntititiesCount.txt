@@ -1,0 +1,27 @@
+# Companies with High Public Entities Count
+
+PREFIX : <http://example.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?companyName ?cpvDesignation ?publicEntitiesCount
+WHERE {
+  ?company a :Company ;
+           :companyName ?companyName ;
+           :cpvDesignation ?cpvDesignation ;
+           :publicEntitiesCount ?publicEntitiesCount .
+
+  FILTER(
+    1 = 1 &&
+
+    ?cpvDesignation = "Serviços de limpeza" &&
+    xsd:integer(?publicEntitiesCount) >= 3
+
+#    ?cpvDesignation = "Serviços de segurança" &&
+#    xsd:integer(?publicEntitiesCount) >= 3
+
+#    ?cpvDesignation = "Serviços de ambulâncias" &&
+#    xsd:integer(?publicEntitiesCount) >= 1
+  )
+}
+GROUP BY ?companyName ?cpvDesignation ?publicEntitiesCount
+ORDER BY DESC(xsd:integer(?publicEntitiesCount))

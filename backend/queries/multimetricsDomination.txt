@@ -1,0 +1,35 @@
+# Identifying Companies Dominating Multiple Metrics
+
+PREFIX : <http://example.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?companyName ?cpvDesignation ?contractsCount ?publicEntitiesCount ?totalCpvValueNormalizedFormatted
+WHERE {
+  ?company a :Company ;
+           :companyName ?companyName ;
+           :cpvDesignation ?cpvDesignation ;
+           :contractsCount ?contractsCount ;
+           :publicEntitiesCount ?publicEntitiesCount ;
+           :totalCpvValueNormalizedFormatted ?totalCpvValueNormalizedFormatted .
+
+  FILTER(
+    1 = 1 &&
+
+    ?cpvDesignation = "Serviços de limpeza" &&
+    xsd:integer(?contractsCount) >= 10 &&
+    xsd:integer(?publicEntitiesCount) >= 3 &&
+    xsd:decimal(?totalCpvValueNormalizedFormatted) >= 44822.79
+
+#    ?cpvDesignation = "Serviços de segurança" &&
+#    xsd:integer(?contractsCount) >= 8 &&
+#    xsd:integer(?publicEntitiesCount) >= 3 &&
+#    xsd:decimal(?totalCpvValueNormalizedFormatted) >= 23825.87
+
+#    ?cpvDesignation = "Serviços de ambulâncias" &&
+#    xsd:integer(?contractsCount) >= 4
+#    xsd:integer(?publicEntitiesCount) >= 1
+#    xsd:decimal(?totalCpvValueNormalizedFormatted) >= 4572.76
+  )
+}
+GROUP BY ?companyName ?cpvDesignation ?contractsCount ?publicEntitiesCount ?totalCpvValueNormalizedFormatted
+ORDER BY DESC(?totalCpvValueNormalizedFormatted)

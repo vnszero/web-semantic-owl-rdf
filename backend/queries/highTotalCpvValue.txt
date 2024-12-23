@@ -1,0 +1,27 @@
+# Companies order by CPV Value
+
+PREFIX : <http://example.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?companyName ?cpvDesignation ?totalCpvValueNormalizedFormatted
+WHERE {
+  ?company a :Company ;
+           :companyName ?companyName ;
+           :cpvDesignation ?cpvDesignation ;
+           :totalCpvValueNormalizedFormatted ?totalCpvValueNormalizedFormatted .
+
+  FILTER(
+    1 = 1 &&
+
+    ?cpvDesignation = "Serviços de limpeza" &&
+    xsd:decimal(?totalCpvValueNormalizedFormatted) >= 44822.79
+
+#    ?cpvDesignation = "Serviços de segurança" &&
+#    xsd:decimal(?totalCpvValueNormalizedFormatted) >= 23825.87
+
+#    ?cpvDesignation = "Serviços de ambulâncias" &&
+#    xsd:decimal(?totalCpvValueNormalizedFormatted) >= 4572.76
+  )
+}
+GROUP BY ?companyName ?cpvDesignation ?totalCpvValueNormalizedFormatted
+ORDER BY DESC(?totalCpvValueNormalizedFormatted)
