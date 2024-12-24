@@ -1,4 +1,4 @@
-# Identifying Companies Dominating Multiple Metrics
+# Companies with High CPV Normalized Value
 
 PREFIX : <http://example.org/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
