@@ -9,6 +9,10 @@ owl/rdf approach for monopoly detection in public contracts
 npm install csv-parser
 ```
 
+```bash
+npm install papaparse
+```
+
 ### apache jena
 
 Download Apache Jena Fuseki 5.2.0.zip
