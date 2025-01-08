@@ -13,6 +13,14 @@ npm install csv-parser
 npm install papaparse
 ```
 
+```bash
+node merge_csv_files.js
+```
+
+```bash
+node convert_statistics_to_rdf.js
+```
+
 ### apache jena
 
 Download Apache Jena Fuseki 5.2.0.zip
